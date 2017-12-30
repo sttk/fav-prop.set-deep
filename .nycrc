@@ -1,0 +1,9 @@
+{
+  "include": [
+    "index.js",
+    "lib"
+  ],
+  "exclude": [
+    "test"
+  ]
+}
