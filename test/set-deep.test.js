@@ -38,25 +38,6 @@ describe('fav.prop.set-deep', function() {
     expect(obj.a00).to.equal(999);
   });
 
-  it('Should set value of the specified prop key', function() {
-    var obj = {
-      a00: {
-        a10: { a20: 1, a21: 2, a22: 3 },
-        a11: { a20: 4, a21: 5, a22: 6 },
-      },
-      a01: {
-        a10: { a20: 7, a21: 8, a22: 9 },
-        a11: {},
-      },
-    };
-
-    setDeep(obj, 'a00', 100);
-    expect(obj.a00, 100);
-
-    setDeep(obj, 'a01', 200);
-    expect(obj.a01, 200);
-  });
-
   it('Should create a property and set its value when the prop does not exist',
   function() {
     var obj = {
@@ -73,7 +54,7 @@ describe('fav.prop.set-deep', function() {
     setDeep(obj, ['a01', 'a11', 'a22'], 'A');
     expect(obj.a01.a11.a22).to.equal('A');
 
-    setDeep(obj, 'a02', 'B');
+    setDeep(obj, ['a02'], 'B');
     expect(obj.a02).to.equal('B');
 
     setDeep(obj, ['a', 'b', 'c', 'd', 'e'], 'C');
@@ -299,5 +280,50 @@ describe('fav.prop.set-deep', function() {
 
     setDeep(obj, [a, b, [c]], 123);
     expect(obj[a][b][c]).to.equal(123);
+  });
+
+  it('Should not set a value prop path is not an array', function() {
+    var obj = {};
+    setDeep(obj, undefined, 123);
+    expect(obj).to.deep.equal({});
+
+    setDeep(obj, null, 123);
+    expect(obj).to.deep.equal({});
+
+    setDeep(obj, true, 123);
+    expect(obj).to.deep.equal({});
+
+    setDeep(obj, false, 123);
+    expect(obj).to.deep.equal({});
+
+    setDeep(obj, 0, 123);
+    expect(obj).to.deep.equal({});
+
+    setDeep(obj, 123, 123);
+    expect(obj).to.deep.equal({});
+
+    setDeep(obj, '', 123);
+    expect(obj).to.deep.equal({});
+
+    setDeep(obj, 'abc', 123);
+    expect(obj).to.deep.equal({});
+
+    setDeep(obj, {}, 123);
+    expect(obj).to.deep.equal({});
+
+    setDeep(obj, { a: 1 }, 123);
+    expect(obj).to.deep.equal({});
+
+    setDeep(obj, function() {}, 123);
+    expect(obj).to.deep.equal({});
+
+    var a = Symbol('a');
+    setDeep(obj, a, 123);
+    expect(obj).to.deep.equal({});
+    expect(obj[a]).to.deep.equal(undefined);
+
+    var d = new Date();
+    setDeep(obj, d, 123);
+    expect(obj).to.deep.equal({});
   });
 });

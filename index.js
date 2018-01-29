@@ -8,7 +8,7 @@ function setDeep(obj, propPath, value) {
   }
 
   if (!isArray(propPath)) {
-    propPath = [propPath];
+    return;
   }
 
   if (!canHaveProp(obj)) {
