@@ -1,5 +1,7 @@
 'use strict';
 
+/* eslint brace-style: off */
+
 var chai = require('chai');
 var expect = chai.expect;
 
@@ -275,5 +277,27 @@ describe('fav.prop.set-deep', function() {
 
     setDeep(obj);
     expect(obj).to.deep.equal({});
+  });
+
+  it('Should not throw an error when 2nd arg is a Symbol array', function() {
+    if (typeof Symbol !== 'function') {
+      this.skip();
+      return;
+    }
+
+    var a = Symbol('a'), b = Symbol('b'), c = Symbol('c');
+    var obj = {};
+    obj[a] = {};
+    obj[a][b] = {};
+    obj[a][b][c] = 123;
+
+    setDeep(obj, [[a], b, c], 123);
+    expect(obj[a][b][c]).to.equal(123);
+
+    setDeep(obj, [a, [b], c], 123);
+    expect(obj[a][b][c]).to.equal(123);
+
+    setDeep(obj, [a, b, [c]], 123);
+    expect(obj[a][b][c]).to.equal(123);
   });
 });

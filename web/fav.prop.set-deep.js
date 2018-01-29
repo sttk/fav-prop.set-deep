@@ -20,7 +20,14 @@ function setDeep(obj, propPath, value) {
 
   for (; i < last; i++) {
     var prop = propPath[i];
-    var v = obj[prop];
+    var v;
+    try {
+      v = obj[prop];
+    } catch (e) {
+      // If `prop` is an array of Symbol, obj[prop] throws an error,
+      // but this function suppress it and return undefined.
+      return;
+    }
 
     if (!canHaveProp(v)) {
       break;
@@ -35,6 +42,8 @@ function setDeep(obj, propPath, value) {
     } catch (e) {
       // If a property is read only, TypeError is thrown,
       // but this function suppresses the error and stop setting.
+      // In addition if `prop` is an array of Symbol, obj[prop] throws an
+      // error, but this function suppress it.
       return;
     }
   }
