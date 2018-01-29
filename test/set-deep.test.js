@@ -317,10 +317,12 @@ describe('fav.prop.set-deep', function() {
     setDeep(obj, function() {}, 123);
     expect(obj).to.deep.equal({});
 
-    var a = Symbol('a');
-    setDeep(obj, a, 123);
-    expect(obj).to.deep.equal({});
-    expect(obj[a]).to.deep.equal(undefined);
+    if (typeof Symbol === 'function') {
+      var a = Symbol('a');
+      setDeep(obj, a, 123);
+      expect(obj).to.deep.equal({});
+      expect(obj[a]).to.deep.equal(undefined);
+    }
 
     var d = new Date();
     setDeep(obj, d, 123);
