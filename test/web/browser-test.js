@@ -283,6 +283,34 @@ describe('fav.prop.set-deep', function() {
     expect(obj[a][b][c]).to.equal(123);
   });
 
+  it('Should not append/modify source object when failed', function() {
+    if (typeof Symbol !== 'function') {
+      this.skip();
+      return;
+    }
+
+    var s = Symbol('s');
+    var obj = { p: {} };
+
+    setDeep(obj, ['p', [s], 'b', 'c'], 123);
+    expect(obj.p.s).to.equal(undefined);
+    expect(obj).to.deep.equal({ p: {} });
+    expect(Object.getOwnPropertyNames(obj.p).length).to.equal(0);
+    expect(Object.getOwnPropertySymbols(obj.p).length).to.equal(0);
+
+    setDeep(obj, ['p', 'a', [s], 'c'], 123);
+    expect(obj).to.deep.equal({ p: {} });
+    expect(obj.p.a).to.equal(undefined);
+    expect(Object.getOwnPropertyNames(obj.p).length).to.equal(0);
+    expect(Object.getOwnPropertySymbols(obj.p).length).to.equal(0);
+
+    setDeep(obj, ['p', 'a', 'b', [s]], 123);
+    expect(obj).to.deep.equal({ p: {} });
+    expect(obj.p.a).to.equal(undefined);
+    expect(Object.getOwnPropertyNames(obj.p).length).to.equal(0);
+    expect(Object.getOwnPropertySymbols(obj.p).length).to.equal(0);
+  });
+
   it('Should not set a value prop path is not an array', function() {
     var obj = {};
     setDeep(obj, undefined, 123);
