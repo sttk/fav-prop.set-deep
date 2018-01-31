@@ -20,6 +20,8 @@ $ npm install --save @fav/prop.set-deep
 
 ## Usage
 
+For Node.js:
+
 ```js
 var setDeep = require('@fav/prop.set-deep');
 var obj = { a: 1, b: { c: 3, d: 4 }, e: 5 };
@@ -52,6 +54,8 @@ For a top property, a string or a symbol can be specified.
 
 This function is targeted at all properties, which are enumerable and unenumerable, own and inherited.
 If target property is read only, this function does nothing and throws no error. 
+
+***NOTE:*** *All versions of Node.js allows to use a string array for getting or setting property, like `obj[['a','b']] == obj['a,b']`. An Symbol array is allowed as same until v4, but is not allowed  on v5 and later (TypeError is thrown). To support same behaviors for all versions, this function does not allow to use an array as a property. (Thus, a property path needs to be always one dimensional array).*
 
 **Parameters:**
 

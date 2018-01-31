@@ -1,7 +1,6 @@
 'use strict';
 
 var isArray = require('@fav/type.is-array');
-var ignoredError = new Error();
 
 function setDeep(obj, propPath, value) {
   if (arguments.length < 3) {
@@ -16,37 +15,45 @@ function setDeep(obj, propPath, value) {
     return;
   }
 
-  var last = propPath.length - 1;
+  var i, last = propPath.length - 1;
+
+  for (i = 0; i < last; i++) {
+    var existentProp = propPath[i];
+    if (isArray(existentProp)) {
+      // This function doesn't allow to use an array as a property.
+      return;
+    }
+
+    var child = obj[existentProp];
+    if (!canHaveProp(child)) {
+      break;
+    }
+    obj = child;
+  }
+
+  for (var j = last; j > i; j--) {
+    var nonExistentProp = propPath[j];
+    if (isArray(nonExistentProp)) {
+      // This function doesn't allow to use an array as a property.
+      return;
+    }
+
+    var parent = {};
+    parent[nonExistentProp] = value;
+    value = parent;
+  }
 
   try {
-    for (var i = 0; i < last; i++) {
-      var prop = propPath[i];
-      var child = getProp(obj, prop);
-
-      if (!canHaveProp(child)) {
-        setProp(obj, prop, createDeep(propPath, i + 1, value));
-        return;
-      }
-
-      obj = child;
+    var graftedProp = propPath[i];
+    if (isArray(graftedProp)) {
+      // This function doesn't allow to use an array as a property.
+      return;
     }
-    setProp(obj, propPath[last], value);
+    obj[graftedProp] = value;
   } catch (e) {
-    /* istanbul ignore if */
-    if (e !== ignoredError) {
-      throw e;
-    }
+    // If a property is read only, TypeError is thrown,
+    // but this function ignores it.
   }
-}
-
-function createDeep(propPath, topIndex, value) {
-  var obj = value;
-  for (var i = propPath.length - 1; i >= topIndex; i--) {
-    var parent = {};
-    setProp(parent, propPath[i], obj);
-    obj = parent;
-  }
-  return obj;
 }
 
 function canHaveProp(obj) {
@@ -60,28 +67,6 @@ function canHaveProp(obj) {
     default: {
       return false;
     }
-  }
-}
-
-function getProp(obj, prop) {
-  try {
-    return obj[prop];
-  } catch (e) {
-    // If `prop` is an array of Symbol, obj[prop] throws
-    // an error, but this function suppress it.
-    throw ignoredError;
-  }
-}
-
-function setProp(obj, prop, value) {
-  try {
-    obj[prop] = value;
-  } catch (e) {
-    // If a property is read only, TypeError is thrown,
-    // but this function ignores it.
-    // In addition, if `prop` is an array of Symbol, obj[prop] throws
-    // an error, but this function suppress it.
-    throw ignoredError;
   }
 }
 

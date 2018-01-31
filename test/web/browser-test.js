@@ -357,6 +357,66 @@ describe('fav.prop.set-deep', function() {
     setDeep(obj, d, 123);
     expect(obj).to.deep.equal({});
   });
+
+  it('Should not allow to use an array as a property', function() {
+    var obj = { a: 1, b: { c: 2 }, 'd,e': 3 };
+    setDeep(obj, ['a'], 10);
+    expect(obj.a).to.equal(10);
+    setDeep(obj, [['a']], 100);
+    expect(obj.a).to.equal(10);
+
+    setDeep(obj, ['b', 'c'], 20);
+    expect(obj.b.c).to.equal(20);
+    setDeep(obj, [['b'], 'c'], 200);
+    expect(obj.b.c).to.equal(20);
+    setDeep(obj, ['b', ['c']], 200);
+    expect(obj.b.c).to.equal(20);
+
+    setDeep(obj, ['d,e'], 30);
+    expect(obj['d,e']).to.equal(30);
+    setDeep(obj, [['d','e']], 30);
+    expect(obj['d,e']).to.equal(30);
+
+    if (typeof Symbol === 'function') {
+      obj = {};
+      var a = Symbol('a'), b = Symbol('b'), c = Symbol('c'),
+          d = Symbol('d'), e = Symbol('e');
+      var de = [d.toString(), e.toString()].toString();
+      obj[a] = 1;
+      obj[a.toString()] = 11;
+      obj[b] = {};
+      obj[b][c] = 2;
+      obj[b][c.toString()] = 21;
+      obj[b.toString()] = {};
+      obj[b.toString()][c] = 22;
+      obj[de] = 3;
+
+      setDeep(obj, [a], 10);
+      expect(obj[a]).to.equal(10);
+      expect(obj[a.toString()]).to.equal(11);
+      setDeep(obj, [[a]], 100);
+      expect(obj[a]).to.equal(10);
+      expect(obj[a.toString()]).to.equal(11);
+
+      setDeep(obj, [b, c], 20);
+      expect(obj[b][c]).to.equal(20);
+      expect(obj[b][c.toString()]).to.equal(21);
+      expect(obj[b.toString()][c]).to.equal(22);
+      setDeep(obj, [[b], c], 200);
+      expect(obj[b][c]).to.equal(20);
+      expect(obj[b][c.toString()]).to.equal(21);
+      expect(obj[b.toString()][c]).to.equal(22);
+      setDeep(obj, [b, [c]], 200);
+      expect(obj[b][c]).to.equal(20);
+      expect(obj[b][c.toString()]).to.equal(21);
+      expect(obj[b.toString()][c]).to.equal(22);
+
+      setDeep(obj, [de], 30);
+      expect(obj[de]).to.equal(30);
+      setDeep(obj, [[d, e]], 300);
+      expect(obj[de]).to.equal(30);
+    }
+  });
 });
 
 })();
