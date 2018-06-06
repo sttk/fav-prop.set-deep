@@ -15,7 +15,7 @@ To install from npm:
 $ npm install --save @fav/prop.set-deep
 ```
 
-***NOTE:*** *npm < 2.7.0 does not support scoped package, but even old version Node.js supports it. So when you use such older npm, you should download this package from [github.com][repo-url], and move it in `node_modules/@fav/prop.set-deep/` directory manually.*
+***NOTE:*** *npm < 2.7.0 does not support scoped package, but old version Node.js supports it. So when you use such older npm, you should download this package from [github.com][repo-url], and move it in `node_modules/@fav/prop.set-deep/` directory manually.*
 
 
 ## Usage
@@ -67,14 +67,13 @@ If target property is read only, this function does nothing and throws no error.
 
 
 ## Checked                                                                      
+### Node.js (4〜)
 
-### Node.js (4〜9)
-
-| Platform  |   4    |   5    |   6    |   7    |   8    |   9    |
-|:---------:|:------:|:------:|:------:|:------:|:------:|:------:|
-| macOS     |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
-| Windows10 |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
-| Linux     |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
+| Platform  |   4    |   5    |   6    |   7    |   8    |   9    |   10   |
+|:---------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+| macOS     |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
+| Windows10 |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
+| Linux     |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
 
 ### io.js (1〜3)
 
@@ -86,11 +85,11 @@ If target property is read only, this function does nothing and throws no error.
 
 ### Node.js (〜0.12)
 
-| Platform  |  0.7   |  0.8   |  0.9   |  0.10  |  0.11  |  0.12  |
-|:---------:|:------:|:------:|:------:|:------:|:------:|:------:|
-| macOS     |        |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
-| Windows10 |        |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
-| Linux     |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
+| Platform  |  0.8   |  0.9   |  0.10  |  0.11  |  0.12  |
+|:---------:|:------:|:------:|:------:|:------:|:------:|
+| macOS     |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
+| Windows10 |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
+| Linux     |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
 
 ### Web browsers
 
@@ -103,7 +102,7 @@ If target property is read only, this function does nothing and throws no error.
 
 ## License
 
-Copyright (C) 2017 Takayuki Sato
+Copyright (C) 2017-2018 Takayuki Sato
 
 This program is free software under [MIT][mit-url] License.
 See the file LICENSE in this distribution for more details.
