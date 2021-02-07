@@ -2,6 +2,12 @@
 
 var isArray = require('@fav/type.is-array');
 
+var disallowProtoPath = function(path, value) {
+  if (value === Object.prototype) {
+    throw new Error("Unsafe path encountered: " + path);
+  }
+}
+
 function setDeep(obj, propPath, value) {
   if (arguments.length < 3) {
     return;
@@ -28,6 +34,7 @@ function setDeep(obj, propPath, value) {
     if (!canHaveProp(child)) {
       break;
     }
+    disallowProtoPath(existentProp, child);
     obj = child;
   }
 
