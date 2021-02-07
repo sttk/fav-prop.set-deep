@@ -416,4 +416,11 @@ describe('fav.prop.set-deep', function() {
       expect(obj[de]).to.equal(30);
     }
   });
+
+  it('should not allow proto path overwrite', function() {
+    var obj = {};
+    expect(function() { setDeep(obj, ["__proto__", "polluted"], "Yes, its polluted") }).to.throw();
+    expect(function() { setDeep(obj, ["constructor", "prototype", "polluted"], "Yes, its polluted") }).to.throw();
+    expect(function() { setDeep(Object, ["prototype", "polluted"], "Yes, its polluted") }).to.throw();
+  })
 });
