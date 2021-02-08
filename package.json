@@ -1,6 +1,6 @@
 {
   "name": "@fav/prop.set-deep",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Sets a property value in property tree of an object with a property path.",
   "main": "index.js",
   "files": [
