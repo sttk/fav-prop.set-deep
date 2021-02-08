@@ -102,7 +102,7 @@ If target property is read only, this function does nothing and throws no error.
 
 ## License
 
-Copyright (C) 2017-2018 Takayuki Sato
+Copyright (C) 2017-2021 Takayuki Sato
 
 This program is free software under [MIT][mit-url] License.
 See the file LICENSE in this distribution for more details.
