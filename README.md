@@ -67,7 +67,16 @@ If target property is read only, this function does nothing and throws no error.
 
 
 ## Checked                                                                      
-### Node.js (4〜)
+
+### Node.js (11〜)
+
+| Platform  |   11   |   12   |   13   |   14   |   15   |
+|:---------:|:------:|:------:|:------:|:------:|:------:|
+| macOS     |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
+| Windows10 |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
+| Linux     |&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|&#x25ef;|
+
+### Node.js (4〜10)
 
 | Platform  |   4    |   5    |   6    |   7    |   8    |   9    |   10   |
 |:---------:|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
@@ -95,7 +104,7 @@ If target property is read only, this function does nothing and throws no error.
 
 | Platform  | Chrome | Firefox | Vivaldi | Safari |  Edge  | IE11   |
 |:---------:|:------:|:-------:|:-------:|:------:|:------:|:------:|
-| macOS     |&#x25ef;|&#x25ef; |&#x25ef; |&#x25ef;|   --   |   --   |
+| macOS     |&#x25ef;|&#x25ef; |&#x25ef; |&#x25ef;|&#x25ef;|   --   |
 | Windows10 |&#x25ef;|&#x25ef; |&#x25ef; |   --   |&#x25ef;|&#x25ef;|
 | Linux     |&#x25ef;|&#x25ef; |&#x25ef; |   --   |   --   |   --   |
 
