@@ -122,8 +122,8 @@ See the file LICENSE in this distribution for more details.
 [npm-url]: https://www.npmjs.com/package/@fav/prop.set-deep
 [mit-img]: https://img.shields.io/badge/license-MIT-green.svg
 [mit-url]: https://opensource.org/licenses/MIT
-[travis-img]: https://travis-ci.org/sttk/fav-prop.set-deep.svg?branch=master
-[travis-url]: https://travis-ci.org/sttk/fav-prop.set-deep
+[travis-img]: https://travis-ci.com/sttk/fav-prop.set-deep.svg?branch=master
+[travis-url]: https://travis-ci.com/github/sttk/fav-prop.set-deep
 [appveyor-img]: https://ci.appveyor.com/api/projects/status/github/sttk/fav-prop.set-deep?branch=master&svg=true
 [appveyor-url]: https://ci.appveyor.com/project/sttk/fav-prop-set-deep
 [coverage-img]: https://coveralls.io/repos/github/sttk/fav-prop.set-deep/badge.svg?branch=master
